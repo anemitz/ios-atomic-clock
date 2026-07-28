@@ -1,5 +1,7 @@
 # Atomic Clock
 
+[![iOS CI](https://github.com/anemitz/ios-atomic-clock/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/anemitz/ios-atomic-clock/actions/workflows/ci.yml)
+
 Atomic Clock is a small SwiftUI app that displays UTC and local time adjusted by
 measurements from several public Network Time Protocol (NTP) servers. It is
 useful for setting a watch or comparing a device clock with network time.
@@ -25,10 +27,11 @@ installed build may need to be rebuilt and installed again.
 
 ## Get started
 
-Clone or download this repository, then open the project:
+Clone this repository, then open the project:
 
 ```zsh
-cd path/to/ios-atomic-clock
+git clone https://github.com/anemitz/ios-atomic-clock.git
+cd ios-atomic-clock
 open AtomicClock.xcodeproj
 ```
 
@@ -36,13 +39,13 @@ In Xcode, select the `AtomicClock` scheme and an iPhone simulator, then click
 Run or press <kbd>Command</kbd>+<kbd>R</kbd>.
 
 The simulator is useful for checking the interface. Test on a physical device
-for results that reflect the phone's actual network and clock.
+for results that reflect the device's actual network and clock.
 
-## Install on your iPhone
+## Install on your iPhone or iPad
 
 1. Open Xcode and choose **Xcode > Settings > Accounts**. Add your Apple
    Account if it is not already listed.
-2. Connect your unlocked iPhone to the Mac. Accept the **Trust This Computer**
+2. Connect your unlocked device to the Mac. Accept the **Trust This Computer**
    prompt if it appears. Xcode can use the device wirelessly after it has been
    paired.
 3. Create your ignored local signing configuration:
@@ -52,18 +55,31 @@ for results that reflect the phone's actual network and clock.
    open -e Config/Signing.local.xcconfig
    ```
 
-4. Replace the example values with your 10-character Apple Team ID and a unique
-   reverse-domain bundle identifier, such as `com.yourname.AtomicClock`. Apple
-   lists the Team ID under **Membership details** in your
-   [developer account](https://developer.apple.com/account).
-5. Open `AtomicClock.xcodeproj`. Automatic signing reads your local
+4. Replace `com.yourname.AtomicClock` with a unique reverse-domain bundle
+   identifier.
+5. Replace `YOUR_TEAM_ID` with your 10-character Apple Team ID:
+
+   - Apple Developer Program members can find it under **Membership details**
+     in their [developer account](https://developer.apple.com/account).
+   - For a free Personal Team, select your account under
+     **Xcode > Settings > Accounts** and use **Manage Certificates** to create
+     an Apple Development certificate if needed. Then run:
+
+     ```zsh
+     security find-identity -v -p codesigning
+     ```
+
+     Use the 10-character value in parentheses after the matching
+     `Apple Development` identity.
+
+6. Open `AtomicClock.xcodeproj`. Automatic signing reads your local
    configuration; avoid selecting a team in **Signing & Capabilities**, because
    doing so writes that personal value into the shared project file.
-6. In the Xcode toolbar, select the `AtomicClock` scheme and your iPhone as the
+7. In the Xcode toolbar, select the `AtomicClock` scheme and your device as the
    run destination. Click Run or press <kbd>Command</kbd>+<kbd>R</kbd>.
-7. If requested, enable **Developer Mode** on the phone under
-   **Settings > Privacy & Security > Developer Mode**, restart the phone, and
-   confirm the prompt after it restarts. Run the app from Xcode again.
+8. If requested, enable **Developer Mode** on the device under
+   **Settings > Privacy & Security > Developer Mode**, restart it, and confirm
+   the prompt after it restarts. Run the app from Xcode again.
 
 With a free Personal Team, Apple currently limits provisioning profiles to
 seven days. Rebuild the app from Xcode when the installed copy expires.
