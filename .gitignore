@@ -20,6 +20,7 @@ xcuserdata/
 .swiftpm/xcode/package.xcworkspace/xcuserdata/
 
 # Signing material and local configuration
+Config/Signing.local.xcconfig
 *.cer
 *.key
 *.mobileprovision

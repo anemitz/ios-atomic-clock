@@ -1,0 +1,7 @@
+// Public defaults. Simulator and unsigned CI builds work without local signing.
+APP_BUNDLE_IDENTIFIER = org.example.AtomicClock
+
+// Each developer may override the team and app identifier in this ignored file.
+#include? "Signing.local.xcconfig"
+
+TEST_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER)Tests

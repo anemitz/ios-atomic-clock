@@ -8,7 +8,9 @@ Thanks for improving Atomic Clock.
 2. Keep the app dependency-free unless a new dependency has a clear benefit and
    a compatible license.
 3. Do not commit Apple signing identities, provisioning profiles, API keys,
-   `.env` files, Xcode user data, or build output.
+   `.env` files, Xcode user data, or build output. Put your team and bundle
+   identifier in the ignored `Config/Signing.local.xcconfig` file as described
+   in the README.
 4. Preserve the Elastic License 2.0 terms. Distributed modified copies must
    include the notices required by that license.
 

@@ -45,14 +45,20 @@ for results that reflect the phone's actual network and clock.
 2. Connect your unlocked iPhone to the Mac. Accept the **Trust This Computer**
    prompt if it appears. Xcode can use the device wirelessly after it has been
    paired.
-3. Open `AtomicClock.xcodeproj`. In the project navigator, select
-   **AtomicClock**, select the **AtomicClock** target, then open
-   **Signing & Capabilities**.
-4. Leave **Automatically manage signing** enabled and choose your team. A free
-   account appears as a **Personal Team**.
-5. Replace the example bundle identifier (`org.example.AtomicClock`) with a
-   unique reverse-domain identifier, such as `com.yourname.AtomicClock`, if
-   Xcode reports that the identifier is unavailable.
+3. Create your ignored local signing configuration:
+
+   ```zsh
+   cp Config/Signing.local.xcconfig.example Config/Signing.local.xcconfig
+   open -e Config/Signing.local.xcconfig
+   ```
+
+4. Replace the example values with your 10-character Apple Team ID and a unique
+   reverse-domain bundle identifier, such as `com.yourname.AtomicClock`. Apple
+   lists the Team ID under **Membership details** in your
+   [developer account](https://developer.apple.com/account).
+5. Open `AtomicClock.xcodeproj`. Automatic signing reads your local
+   configuration; avoid selecting a team in **Signing & Capabilities**, because
+   doing so writes that personal value into the shared project file.
 6. In the Xcode toolbar, select the `AtomicClock` scheme and your iPhone as the
    run destination. Click Run or press <kbd>Command</kbd>+<kbd>R</kbd>.
 7. If requested, enable **Developer Mode** on the phone under
@@ -66,6 +72,10 @@ Apple references:
 [running an app on a physical device](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices),
 [enabling Developer Mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device),
 and [Personal Team limits](https://developer.apple.com/help/account/basics/about-your-developer-account).
+
+`Config/Signing.local.xcconfig` is ignored by Git. Simulator and unsigned CI
+builds use the public defaults in `Config/Signing.xcconfig`, while each
+contributor can use a different local team and bundle identifier.
 
 ## Build and test from Terminal
 

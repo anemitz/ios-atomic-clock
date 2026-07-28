@@ -20,6 +20,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+      - name: Reject personal signing configuration
+        shell: bash
+        run: |
+          if git grep -n -E \
+            'DEVELOPMENT_TEAM[[:space:]]*=[[:space:]]*[A-Z0-9]{10}'; then
+            echo "Move DEVELOPMENT_TEAM to Config/Signing.local.xcconfig." >&2
+            exit 1
+          fi
+          if git ls-files --error-unmatch \
+            Config/Signing.local.xcconfig >/dev/null 2>&1; then
+            echo "Config/Signing.local.xcconfig must not be committed." >&2
+            exit 1
+          fi
+
       - name: Select an available iPhone simulator
         id: simulator
         shell: bash
