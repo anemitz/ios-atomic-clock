@@ -4,7 +4,9 @@
 
 Atomic Clock is a small SwiftUI app that displays UTC and local time adjusted by
 measurements from several public Network Time Protocol (NTP) servers. It is
-useful for setting a watch or comparing a device clock with network time.
+useful for setting a watch or comparing a device clock with network time. There 
+are no ads or other distracting UI like most of the apps on the app store today.
+Just a simple watch-setting app.
 
 The app:
 
